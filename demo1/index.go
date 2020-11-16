@@ -15,6 +15,16 @@ func main() {
 	fmt.Println(t1, t2, t3, t4, t5)
 	fn1("lek")
 	fn2("hello", 11, false)
+
+	result := fn3("hello", 11, false)
+	fmt.Println(result)
+
+	// Array
+	var a1 []int = []int{1, 2, 3, 4}
+	fmt.Println(a1)
+
+	a2 := []string{"angular", "react", "swift"}
+	fmt.Println(a2)
 }
 
 func fn1(p1 string) {
@@ -27,5 +37,5 @@ func fn2(p1 string, p2 int, p3 bool) {
 
 func fn3(p1 string, p2 int, p3 bool) string {
 	fmt.Printf("Hey %s, %d, %v\n", p1, p2, p3)
-	return "I am return function"
+	return "I am return เล็ก"
 }
