@@ -34,6 +34,7 @@ func register(c *gin.Context) {
 		panic(e)
 	}
 
+	user.Password, _ = hashPassword(user.Password)
 	if e := db.GetDB().Create(&user).Error; e != nil {
 		panic(e)
 	}
