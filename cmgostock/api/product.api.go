@@ -1,13 +1,19 @@
 package api
 
-import "github.com/gin-gonic/gin"
+import (
+	"net/http"
 
+	"github.com/gin-gonic/gin"
+)
 
 func SetupProductAPI(router *gin.Engine) {
-	router.Group("/api/v2", getProduct)
+	productAPI := router.Group("/api/v2")
+	{
+		productAPI.GET("/product", getProduct)
+	}
 
 }
 
 func getProduct(c *gin.Context) {
-
+	c.JSON(http.StatusOK, []int{1, 2, 3, 4})
 }
