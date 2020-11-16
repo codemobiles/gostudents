@@ -1,6 +1,8 @@
 package api
 
 import (
+	"fmt"
+	"main/model"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -14,7 +16,14 @@ func SetupAuthenAPI(router *gin.Engine) {
 }
 
 func login(c *gin.Context) {
-	c.String(http.StatusOK, "Login")
+
+	var user model.User
+	if e := c.ShouldBind(&user); e != nil {
+		fmt.Println(e)
+	}
+
+	c.JSON(http.StatusOK, user)
+
 }
 
 func register(c *gin.Context) {
