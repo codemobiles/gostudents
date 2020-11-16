@@ -1,10 +1,12 @@
 package api
 
 import (
+	"main/db"
 	"main/model"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
+	"golang.org/x/crypto/bcrypt"
 )
 
 // SetupAuthenAPI - Call this method to setup authen api
@@ -27,10 +29,17 @@ func login(c *gin.Context) {
 }
 
 func register(c *gin.Context) {
+	var user model.User
+	if e := c.ShouldBind(&user); e != nil {
+		panic(e)
+	}
+
+	if e := db.GetDB().Create(&user).Error; e != nil {
+		panic(e)
+	}
+
 	c.String(http.StatusOK, "Register")
 }
-
-
 
 func checkPasswordHash(password, hash string) bool {
 	err := bcrypt.CompareHashAndPassword([]byte(hash), []byte(password))
