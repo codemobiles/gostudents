@@ -1,6 +1,7 @@
 package api
 
 import (
+	"main/interceptor"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -9,7 +10,7 @@ import (
 func SetupProductAPI(router *gin.Engine) {
 	productAPI := router.Group("/api/v2")
 	{
-		productAPI.GET("/product", getProduct)
+		productAPI.GET("/product", interceptor.VerifyIt, getProduct)
 	}
 
 }

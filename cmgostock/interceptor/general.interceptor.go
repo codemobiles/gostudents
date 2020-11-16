@@ -4,6 +4,6 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func verifyIt(c *gin.Context) {
+func VerifyIt(c *gin.Context) {
 	c.Next()
 }
