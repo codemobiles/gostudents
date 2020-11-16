@@ -2,6 +2,7 @@ package api
 
 import (
 	"main/db"
+	"main/interceptor"
 	"main/model"
 	"net/http"
 
@@ -31,7 +32,8 @@ func login(c *gin.Context) {
 	}
 
 	if checkPasswordHash(user.Password, queryUser.Password) {
-		c.JSON(200, gin.H{"result": "ok", "token": "1234"})
+		token := interceptor.JwtSign(queryUser)
+		c.JSON(200, gin.H{"result": "ok", "token": token})
 	} else {
 		c.JSON(http.StatusOK, gin.H{"result": "nok", "error": "invalid password"})
 	}
