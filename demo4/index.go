@@ -4,9 +4,11 @@ import (
 	_ "fmt"
 	_ "net/http"
 
-	_ "github.com/gin-gonic/gin"
+	"github.com/gin-gonic/gin"
 )
 
 func main() {
 
+	server := gin.Default()
+	server.Run(":85")
 }
