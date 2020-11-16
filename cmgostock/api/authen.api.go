@@ -1,7 +1,6 @@
 package api
 
 import (
-	"fmt"
 	"main/model"
 	"net/http"
 
@@ -19,7 +18,8 @@ func login(c *gin.Context) {
 
 	var user model.User
 	if e := c.ShouldBind(&user); e != nil {
-		fmt.Println(e)
+		// fmt.Println(e)
+		panic(e)
 	}
 
 	c.JSON(http.StatusOK, user)
