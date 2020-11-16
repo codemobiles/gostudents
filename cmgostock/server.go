@@ -1,14 +1,16 @@
 package main
 
 import (
+	"main/api"
 	_ "time"
 
-	_ "github.com/gin-gonic/gin"
+	"github.com/gin-gonic/gin"
 	_ "github.com/itsjamie/gin-cors"
 )
 
 func main() {
 	router := gin.Default()
+	api.Setup(router)
 
 	router.Run(":8081")
 }
