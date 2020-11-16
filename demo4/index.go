@@ -15,5 +15,13 @@ func main() {
 		c.String(http.StatusOK, "I am Root")
 	})
 
+	server.GET("/login", func(c *gin.Context) {
+		username := c.Query("username")
+		password := c.Query("password")
+
+		// http://localhost:85/login?username=lek&password=1234
+		c.JSON(http.StatusOK, gin.H{"username": username, "password": password})
+	})
+
 	server.Run(":85")
 }
