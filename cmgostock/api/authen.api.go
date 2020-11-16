@@ -20,8 +20,20 @@ func login(c *gin.Context) {
 
 	var user model.User
 	if e := c.ShouldBind(&user); e != nil {
-		// fmt.Println(e)
-		panic(e)
+		c.JSON(http.StatusBadRequest, gin.H{"result": "nok", "error": e})
+		return
+	}
+
+	var queryUser model.User
+	if e := db.GetDB().First(&queryUser, "username = ?", user.Username).Error; e != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"result": "nok", "error": e})
+		return
+	}
+
+	if checkPasswordHash(user.Password, queryUser.Password) {
+		c.JSON(200, gin.H{"result": "ok", "token": "1234"})
+	} else {
+		c.JSON(http.StatusOK, gin.H{"result": "nok", "error": "invalid password"})
 	}
 
 	c.JSON(http.StatusOK, user)
