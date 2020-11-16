@@ -6,10 +6,15 @@ import (
 )
 
 type user struct {
-	username string
-	password string
-	age      int
-	isAdmin  bool
+	username string `json:"username"`
+	password string `json:"password"`
+	age      int    `json:"age"`
+	isAdmin  bool   `json:"isAdmin"`
+}
+
+type account struct {
+	Username string `json:"username"`
+	Password string `json:"password"`
 }
 
 func (u user) clear() user {
@@ -39,8 +44,15 @@ func main() {
 	if e := json.Unmarshal([]byte(jsonString), &u1); e != nil {
 		fmt.Println(e)
 	}
-
 	fmt.Println(u1)
+
+	u2 := account{}
+	jsonString2 := `{"username":"codemobiles", "password":"777"}`
+	if e := json.Unmarshal([]byte(jsonString2), &u2); e != nil {
+		fmt.Println(e)
+	}
+
+	fmt.Println(u2)
 }
 
 func f1(value user) {
