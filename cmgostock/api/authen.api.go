@@ -26,7 +26,7 @@ func login(c *gin.Context) {
 
 	var queryUser model.User
 	if e := db.GetDB().First(&queryUser, "username = ?", user.Username).Error; e != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"result": "nok", "error": e})
+		c.JSON(http.StatusBadRequest, gin.H{"result": "nok", "error": "invalid username"})
 		return
 	}
 
