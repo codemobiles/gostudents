@@ -25,6 +25,35 @@ func main() {
 
 	a2 := []string{"angular", "react", "swift"}
 	fmt.Println(a2)
+	fmt.Println(len(a2))
+	fmt.Println(a2[1])
+
+	// Slice
+	var s1 = make([]int, 3)
+	s1[0] = 8
+	s1[1] = 7
+	s1[2] = 6
+	s1 = append(s1, 5)
+	s1 = append(s1, 4)
+	s1 = append(s1, 3)
+	s1 = s1[0 : len(s1)-1]
+	fmt.Println(s1)
+
+	// Map
+	var numbers = map[string]int{"one": 1, "two": 2, "three": 3}
+	fmt.Println("", numbers["two"])
+
+	courses := map[string]string{"ng": "angular", "rn": "reactnative"}
+	if courses["ng"] == "angular" {
+		fmt.Println("This is Angular")
+	} else {
+		fmt.Println("This NOT Angular")
+	}
+
+	if result := 11; result == 10 {
+		fmt.Println("OK")
+	}
+
 }
 
 func fn1(p1 string) {
