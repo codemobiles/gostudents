@@ -31,15 +31,18 @@ func login(c *gin.Context) {
 func register(c *gin.Context) {
 	var user model.User
 	if e := c.ShouldBind(&user); e != nil {
-		panic(e)
+		// panic(e)
+		c.JSON(http.StatusBadRequest, gin.H{"result": "nok", "error": e})
 	}
 
 	user.Password, _ = hashPassword(user.Password)
 	if e := db.GetDB().Create(&user).Error; e != nil {
-		panic(e)
+		// panic(e)
+		// fmt.Println(e)
+		c.JSON(http.StatusBadRequest, gin.H{"result": "nok", "error": e})
 	}
 
-	c.String(http.StatusOK, "Register")
+	c.JSON(http.StatusOK, gin.H{"result": "ok", "message": user})
 }
 
 func checkPasswordHash(password, hash string) bool {
