@@ -35,9 +35,6 @@ func login(c *gin.Context) {
 	} else {
 		c.JSON(http.StatusOK, gin.H{"result": "nok", "error": "invalid password"})
 	}
-
-	c.JSON(http.StatusOK, user)
-
 }
 
 func register(c *gin.Context) {
