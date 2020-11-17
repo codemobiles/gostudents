@@ -5,3 +5,8 @@ https://chrome.google.com/webstore/detail/octotree-github-code-tree/bkhaagjahfmj
 
 
 https://linux4one.com/how-to-install-go-on-centos-7
+
+
+export GOROOT=/usr/local/go
+export PATH=$GOPATH/bin:$GOROOT/bin:$PATH
+export GIN_MODE=debug
