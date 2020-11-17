@@ -35,7 +35,6 @@ func showCircleInfo(s shape) float64 {
 	} else {
 		panic("Error")
 	}
-
 }
 
 func showInfo(s shape) {
