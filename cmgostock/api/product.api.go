@@ -1,6 +1,7 @@
 package api
 
 import (
+	"fmt"
 	"main/db"
 	"main/model"
 	"net/http"
@@ -17,9 +18,24 @@ func SetupProductAPI(router *gin.Engine) {
 
 }
 
+/*
 // http://localhost:8081/api/v2/product
 func getProduct(c *gin.Context) {
 	var products []model.Product
 	db.GetDB().Find(&products)
+	c.JSON(http.StatusOK, products)
+}
+*/
+
+func getProduct(c *gin.Context) {
+
+	var products []model.Product
+	if keyword := c.Query("keyword"); keyword != "" {
+		keyword = fmt.Sprintf("%%%s%%", keyword)
+		db.GetDB().Where("name like ?", keyword).Find(&products)
+	} else {
+		db.GetDB().Find(&products)
+	}
+
 	c.JSON(http.StatusOK, products)
 }
