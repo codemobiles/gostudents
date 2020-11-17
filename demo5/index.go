@@ -29,6 +29,15 @@ func getArea(s shape) float64 {
 	return s.area()
 }
 
+func showCircleInfo(s shape) float64 {
+	if c, ok := s.(circle); ok == true {
+		return c.area()
+	} else {
+		panic("Error")
+	}
+
+}
+
 func showInfo(s shape) {
 
 }
@@ -39,4 +48,5 @@ func main() {
 
 	fmt.Printf("Rectangle: %f\n", getArea(r))
 	fmt.Printf("Circle: %f\n", getArea(c))
+	fmt.Printf("Cast Circle %f\n", showCircleInfo(r))
 }
