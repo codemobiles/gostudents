@@ -14,7 +14,6 @@ func main() {
 	ch <- 2 // send
 	fmt.Println("step2")
 	fmt.Println(<-ch)
-
 	time.Sleep(1 * time.Second)
 
 }

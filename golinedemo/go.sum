@@ -1,0 +1,6 @@
+github.com/google/uuid v1.1.2 h1:EVhdT+1Kseyi1/pUmXKaFxYsDNy9RQYkMWRH68J/W7Y=
+github.com/google/uuid v1.1.2/go.mod h1:TIyPZe4MgqvfeYDBFedMoGGpEw/LqOeaOT+nhxU+yHo=
+github.com/pkg/errors v0.9.1 h1:FEBLx1zS214owpjy7qsBeixbURkuhQAwrK5UwLGTwt4=
+github.com/pkg/errors v0.9.1/go.mod h1:bwawxfHBFNV+L2hUp1rHADufV3IMtnDRdf1r5NINEl0=
+github.com/utahta/go-linenotify v0.4.2 h1:E0VuRHs+PI5ySNn954x3qKbjKR3RRYJza8/K0U/1hGM=
+github.com/utahta/go-linenotify v0.4.2/go.mod h1:IZv+RJvibrUq3FnUACDe5F2tmjYwILW/U4WftFH2Jv4=
