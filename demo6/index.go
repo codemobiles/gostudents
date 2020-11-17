@@ -5,21 +5,16 @@ import (
 	"time"
 )
 
-func run1() {
-	for i := 0; i < 100; i++ {
-		fmt.Println("Run1 something")
-	}
-}
-
-func run2() {
-	for i := 0; i < 100; i++ {
-		fmt.Println("Run2 something")
-	}
-}
-
 func main() {
-	go run1()
-	go run2()
+	ch := make(chan int, 1)
+	ch <- 1 // send
+	fmt.Println("step1")
+	fmt.Println(<-ch)
 
-	time.Sleep(5 * time.Second)
+	ch <- 2 // send
+	fmt.Println("step2")
+	fmt.Println(<-ch)
+
+	time.Sleep(1 * time.Second)
+
 }
