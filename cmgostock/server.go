@@ -10,7 +10,8 @@ import (
 
 func main() {
 	router := gin.Default()
-	api.Setup(router)
+	router.Static("/images", "./uploaded/images")
 
+	api.Setup(router)
 	router.Run(":8081")
 }
