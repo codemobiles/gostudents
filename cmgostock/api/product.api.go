@@ -1,7 +1,9 @@
 package api
 
 import (
+	"main/db"
 	"main/interceptor"
+	"main/model"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -10,11 +12,14 @@ import (
 func SetupProductAPI(router *gin.Engine) {
 	productAPI := router.Group("/api/v2")
 	{
-		productAPI.GET("/product", interceptor.VerifyIt, getProduct)
+		// productAPI.GET("/product", interceptor.VerifyIt, getProduct)
+		productAPI.GET("/product", interceptor.JwtVerify, getProduct)
 	}
 
 }
 
 func getProduct(c *gin.Context) {
-	c.JSON(http.StatusOK, []int{1, 2, 3, 4})
+	var products []model.Product
+	db.GetDB().Find(&products)
+	c.JSON(http.StatusOK, products)
 }
