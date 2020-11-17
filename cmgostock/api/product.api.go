@@ -22,6 +22,7 @@ func SetupProductAPI(router *gin.Engine) {
 		productAPI.GET("/product/:id" /*interceptor.JwtVerify,*/, getProductByID)
 		productAPI.POST("/product" /*interceptor.JwtVerify,*/, createProduct)
 		productAPI.PUT("/product" /*interceptor.JwtVerify,*/, editProduct)
+		productAPI.DELETE("/product/:id" /*interceptor.JwtVerify,*/, deleteProduct)
 
 	}
 
@@ -108,7 +109,6 @@ func editProduct(c *gin.Context) {
 	saveImage(image, &product, c)
 	c.JSON(http.StatusOK, gin.H{"result": product})
 }
-
 
 func deleteProduct(c *gin.Context) {
 

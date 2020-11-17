@@ -70,6 +70,9 @@ Content-Type: image/png
 ------WebKitFormBoundary7MA4YWxkTrZu0gW--
 
 
+### Delete
+DELETE http://localhost:8081/api/v2/product/16 HTTP/1.1
+
 
 ---------------------------------------------
 ### Heroku
