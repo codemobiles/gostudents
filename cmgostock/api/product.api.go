@@ -4,7 +4,10 @@ import (
 	"fmt"
 	"main/db"
 	"main/model"
+	"mime/multipart"
 	"net/http"
+	"os"
+	"path/filepath"
 	"strconv"
 	"time"
 
@@ -57,5 +60,32 @@ func createProduct(c *gin.Context) {
 	product.Stock, _ = strconv.ParseInt(c.PostForm("stock"), 10, 64)
 	product.Price, _ = strconv.ParseFloat(c.PostForm("price"), 64)
 	product.CreatedAt = time.Now()
+	db.GetDB().Create(&product)
 
+	c.JSON(http.StatusOK, gin.H{"result": product})
+
+}
+
+func fileExists(filename string) bool {
+	info, err := os.Stat(filename)
+	if os.IsNotExist(err) {
+		return false
+	}
+	return !info.IsDir()
+}
+
+func saveImage(image *multipart.FileHeader, product *model.Product, c *gin.Context) {
+	if image != nil {
+		runningDir, _ := os.Getwd()
+		product.Image = image.Filename
+		extension := filepath.Ext(image.Filename)
+		fileName := fmt.Sprintf("%d%s", product.ID, extension)
+		filePath := fmt.Sprintf("%s/uploaded/images/%s", runningDir, fileName)
+
+		if fileExists(filePath) {
+			os.Remove(filePath)
+		}
+		c.SaveUploadedFile(image, filePath)
+		db.GetDB().Model(&product).Update("image", fileName)
+	}
 }
