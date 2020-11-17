@@ -62,6 +62,8 @@ func createProduct(c *gin.Context) {
 	product.CreatedAt = time.Now()
 	db.GetDB().Create(&product)
 
+	image, _ := c.FormFile("image")
+	saveImage(image, &product, c)
 	c.JSON(http.StatusOK, gin.H{"result": product})
 
 }
