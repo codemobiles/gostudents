@@ -39,3 +39,11 @@ func getProduct(c *gin.Context) {
 
 	c.JSON(http.StatusOK, products)
 }
+
+
+
+func getProductByID(c *gin.Context) {
+	var product model.Product
+	db.GetDB().Where("id = ?", c.Param("id")).First(&product)
+	c.JSON(200, product)
+}
