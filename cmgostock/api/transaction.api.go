@@ -2,6 +2,9 @@ package api
 
 import (
 	"main/db"
+	"main/model"
+	"net/http"
+	"time"
 
 	"github.com/gin-gonic/gin"
 )
@@ -31,4 +34,16 @@ func getTransaction(c *gin.Context) {
 	var result []TransactionResult
 	db.GetDB().Debug().Raw("SELECT transactions.id, total, paid, change, payment_type, payment_detail, order_list, users.username as Staff, transactions.created_at FROM transactions join users on transactions.staff_id = users.id order by transactions.created_at DESC", nil).Scan(&result)
 	c.JSON(200, result)
+}
+
+func createTransaction(c *gin.Context) {
+	var transaction model.Transaction
+	if err := c.ShouldBind(&transaction); err == nil {
+		transaction.StaffID = c.GetString("jwt_staff_id")
+		transaction.CreatedAt = time.Now()
+		db.GetDB().Create(&transaction)
+		c.JSON(http.StatusOK, gin.H{"result": "ok", "data": transaction})
+	} else {
+		c.JSON(404, gin.H{"result": "nok"})
+	}
 }
