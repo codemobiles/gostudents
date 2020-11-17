@@ -5,6 +5,8 @@ import (
 	"main/db"
 	"main/model"
 	"net/http"
+	"strconv"
+	"time"
 
 	"github.com/gin-gonic/gin"
 )
@@ -47,4 +49,13 @@ func getProductByID(c *gin.Context) {
 	var product model.Product
 	db.GetDB().Where("id = ?", c.Param("id")).First(&product)
 	c.JSON(200, product)
+}
+
+func createProduct(c *gin.Context) {
+	product := model.Product{}
+	product.Name = c.PostForm("name")
+	product.Stock, _ = strconv.ParseInt(c.PostForm("stock"), 10, 64)
+	product.Price, _ = strconv.ParseFloat(c.PostForm("price"), 64)
+	product.CreatedAt = time.Now()
+
 }
