@@ -1,0 +1,1 @@
+https://notify-bot.line.me/th/
