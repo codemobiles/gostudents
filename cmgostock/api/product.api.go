@@ -14,6 +14,8 @@ func SetupProductAPI(router *gin.Engine) {
 	{
 		// productAPI.GET("/product", interceptor.VerifyIt, getProduct)
 		productAPI.GET("/product" /*interceptor.JwtVerify,*/, getProduct)
+		productAPI.GET("/product/:id" /*interceptor.JwtVerify,*/, getProductByID)
+
 	}
 
 }
@@ -39,8 +41,6 @@ func getProduct(c *gin.Context) {
 
 	c.JSON(http.StatusOK, products)
 }
-
-
 
 func getProductByID(c *gin.Context) {
 	var product model.Product
